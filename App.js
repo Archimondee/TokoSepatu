@@ -11,6 +11,8 @@ import CartScreen from './Components/Market/CartScreen';
 import CheckoutScreen from './Components/Market/CheckoutScreen';
 import InformationScreen from './Components/Market/InformationScreen';
 
+import TransaksiScreen from './Components/Market/TransaksiScreen';
+
 import Main from './Components/Route';
 
 export default class App extends React.Component {

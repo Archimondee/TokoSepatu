@@ -8,6 +8,7 @@ export default class ProductScreen extends Component {
     super(props);
     this.state = {
       //Config Photo
+      id_barang: this.props.navigation.getParam('id_barang'),
       foto_base641: this.props.navigation.getParam('foto1'),
       tipe1: this.props.navigation.getParam('tipe1'),
 
@@ -27,6 +28,8 @@ export default class ProductScreen extends Component {
       harga: this.props.navigation.getParam('harga')
     };
   }
+
+  
   //Edit Item
   render() {
     return (
@@ -110,6 +113,7 @@ export default class ProductScreen extends Component {
                   </View>
                   <View style={{ paddingTop: 20, paddingBottom: 30 }}>
                     <Button block onPress={()=>this.props.navigation.navigate('Cart',{
+                      id_barang: this.state.id_barang,
                       nama_barang:this.state.nama_barang,
                       harga: this.state.harga,
                       foto_base641: this.state.foto_base641,

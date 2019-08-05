@@ -24,7 +24,7 @@ export default class LoginScreen extends Component {
 
   _userLogin = () => {
     const {username, password} = this.state;
-    fetch('http://192.168.0.6:8080/api_sepatu/Login.php',{
+    fetch('http://192.168.0.7:8080/api_sepatu/Login.php',{
       method: 'POST',
       headers:{
         'Accept' : 'application/json',

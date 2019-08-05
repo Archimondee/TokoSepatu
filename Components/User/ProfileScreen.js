@@ -69,32 +69,6 @@ export default class ProfileScreen extends Component {
           </View>
         </View>
         <View style={{ flex: 1.5, paddingTop: 10 }}>
-          <Card style={{ paddingTop: 10, paddingBottom:10, flex:0.25}}>
-            <View style={{flex:0.4}}>
-              <View style={{ flex: 1, flexDirection: 'column', alignContent: 'space-between', justifyContent:'center', alignItems:'center', borderBottomColor:'black', borderBottomWidth:0.2, marginLeft:10, marginRight:10 }}>
-                <Left style={{ flex: 0.5, paddingLeft:10, paddingTop:10, alignSelf:'flex-start' }}>
-                  <Text>Pesanan Saya</Text>
-                </Left>
-                <TouchableOpacity style={{ flex: 0.5, paddingRight: 10, paddingBottom:30, alignSelf:'flex-end' }}>
-                  <Text>Lihat riwayat > </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{flex:0.5, flexDirection:'row', justifyContent:'space-between', paddingTop:10}}>
-              <View style={{ flex: 0.4, alignItems: 'center', flexDirection: 'column', height: 100}}>
-                <Ionicons name="ios-wallet" size={32} color="black" />
-                <Text>Belum Bayar</Text>
-              </View>
-              <View style={{ flex: 0.4, alignItems: 'center', flexDirection: 'column', height: 100 }}>
-                <Ionicons name="ios-wallet" size={32} color="black" />
-                <Text>Belum Bayar</Text>
-              </View>
-              <View style={{ flex: 0.4, alignItems: 'center', flexDirection: 'column', height: 100 }}>
-                <Ionicons name="ios-wallet" size={32} color="black" />
-                <Text>Belum Bayar</Text>
-              </View>
-            </View>
-          </Card>
           <Card>
             <CardItem bordered button onPress={() => this.props.navigation.navigate('ChangeScreen')}>
               <Text>Pengaturan Akun</Text>

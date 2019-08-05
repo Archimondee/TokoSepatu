@@ -13,7 +13,7 @@ export default class HomeScreen extends Component {
   }
 
   _getItems = () => {
-    fetch('http://192.168.0.6:8080/api_sepatu/getItem.php', {
+    fetch('http://192.168.0.7:8080/api_sepatu/getItem.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -38,7 +38,7 @@ export default class HomeScreen extends Component {
           username: value
         })
 
-        fetch('http://192.168.0.6:8080/api_sepatu/getInfo.php',{
+        fetch('http://192.168.0.7:8080/api_sepatu/getInfo.php',{
           method: 'POST',
           header: {
             'Accept' : 'application/json',
@@ -52,7 +52,7 @@ export default class HomeScreen extends Component {
             this.setState({
               nama: responseJson[0].nama || ''
             })
-            alert('Selamat datang '+this.state.nama);
+            
             let Profile = {
               nama : responseJson[0].nama || '',
               username : responseJson[0].username || '',

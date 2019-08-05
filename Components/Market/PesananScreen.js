@@ -9,7 +9,9 @@ import PacketScreen from './PacketScreen';
 import SendScreen from './SendScreen';
 
 export default class PesananScreen extends Component {
+  
   render() {
+    const { navigation } = this.props;
     return (
       <Container style={{paddingTop:30}}>
         <Header hasTabs style={{ backgroundColor:'#2f5aa4'}}>
@@ -19,14 +21,11 @@ export default class PesananScreen extends Component {
           <Right />
         </Header>
         <Tabs>
-          <Tab heading="Dikemas" tabStyle={{ backgroundColor: '#2f5aa4' }} activeTabStyle={{ backgroundColor: '#2f5aa4' }}>
-            <PacketScreen />
-          </Tab>
-          <Tab heading="Dikirim" tabStyle={{ backgroundColor: '#2f5aa4' }} activeTabStyle={{ backgroundColor: '#2f5aa4' }}>
-            <SendScreen />
+          <Tab heading="Pembelian" tabStyle={{ backgroundColor: '#2f5aa4' }} activeTabStyle={{ backgroundColor: '#2f5aa4' }}>
+            <PacketScreen navigation={navigation}/>
           </Tab>
           <Tab heading="Selesai" tabStyle={{ backgroundColor: '#2f5aa4' }} activeTabStyle={{ backgroundColor: '#2f5aa4' }}>
-            <DoneScreen />
+            <SendScreen navigation={navigation}/>
           </Tab>
         </Tabs>
       </Container>

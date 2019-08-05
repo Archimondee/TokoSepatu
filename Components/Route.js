@@ -23,6 +23,10 @@ import PayScreen from './Market/PayScreen';
 import SendScreen from './Market/SendScreen';
 import PacketScreen from './Market/PacketScreen';
 
+import TransaksiScreen from './Market/TransaksiScreen';
+import Transaksi1Screen from './Market/Transaksi1Screen';
+import PenerimaScreen from './Market/PenerimaScreen';
+
 
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
@@ -33,7 +37,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     iconName = 'ios-home';
   } else if (routeName === 'Tokoku') {
     iconName = 'ios-search';
-  } else if (routeName === 'Pesanan') {
+  } else if (routeName === 'Pembelian') {
     iconName = 'ios-cart';
   } else if (routeName === 'Account') {
     //iconComponent = SimpleLineIcons
@@ -73,8 +77,8 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 const MainNavigation = createBottomTabNavigator({
   Home: HomeStack,
-  Pesanan: PesananScreen,
-  Tokoku : PesananScreen,
+  Pembelian: PesananScreen,
+  Tokoku : PesananScreen, //Wishlist
   Account: ProfileScreen
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -102,15 +106,19 @@ const MainNavigation = createBottomTabNavigator({
 
   const Market = createStackNavigator({
     Cart : CartScreen,
+    Packet: PacketScreen,
+    Pesanan: PesananScreen,
+    Penerima: PenerimaScreen,
     Checkout: CheckoutScreen,
     Done: DoneScreen,
     Information: InformationScreen,
-    Packet: PacketScreen,
+    Transaksi:TransaksiScreen,
+    Transaksi1:Transaksi1Screen,
     Pay: PayScreen,
-    Pesanan: PesananScreen,
-    Send:SendScreen
+    Send:SendScreen,
   },{
-    headerMode:'none'
+    headerMode:'none',
+    initialRouteName:'Cart'
   })
 
 export default Main = createAppContainer(createSwitchNavigator({

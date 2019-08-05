@@ -7,6 +7,7 @@ export default class CartScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id_barang: this.props.navigation.getParam('id_barang'),
       nama_barang: this.props.navigation.getParam('nama_barang'),
       harga: this.props.navigation.getParam('harga'),
       foto_base641: this.props.navigation.getParam('foto_base641'),
@@ -26,7 +27,7 @@ export default class CartScreen extends Component {
             <Ionicons name="ios-arrow-back" size={32} color="black" />
           </TouchableOpacity>
           <View style={{ flex: 0.8 }}>
-            <Text style={{ color: 'black', fontSize:18 }}>Checkout</Text>
+            <Text style={{ color: 'black', fontSize:18 }}>Confirmation</Text>
           </View>
         </View>
 
@@ -55,6 +56,7 @@ export default class CartScreen extends Component {
         </Card>
         <View style={{padding:10, marginLeft:15, marginRight:15}}>
           <Button block onPress={() => this.props.navigation.navigate('Checkout',{
+            id_barang: this.state.id_barang,
             nama_barang: this.state.nama_barang,
             harga: this.state.harga,
             foto_base641: this.state.foto_base641,

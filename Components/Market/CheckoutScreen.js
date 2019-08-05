@@ -11,7 +11,29 @@ export default class CheckoutScreen extends Component {
       harga: this.props.navigation.getParam('harga'),
       foto_base641: this.props.navigation.getParam('foto_base641'),
       tipe1: this.props.navigation.getParam('tipe1'),
+      id_barang: this.props.navigation.getParam('id_barang'),
+
+      alamat: null,
+      pesan: '',
     };
+  }
+
+  _checkInput(){
+    const {alamat, id_barang, pesan, harga, foto_base641, tipe1, nama_barang} = this.state;
+    if(alamat == null || alamat == ''){
+      alert('Kolom alamat tidak boleh kosong');
+    }else{
+      this.props.navigation.navigate('Information',{
+        id_barang: id_barang,
+        nama_barang: nama_barang,
+        harga: harga,
+        foto_base641: foto_base641,
+        tipe1: tipe1,
+
+        alamat: alamat,
+        pesan: pesan,
+      })
+    }
   }
 
 
@@ -22,7 +44,7 @@ export default class CheckoutScreen extends Component {
     return (
       <View style={{ flex: 1, paddingTop: 32 }}>
         <View style={{ height: 70, width: width, flex: 0.07, flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-          <TouchableOpacity style={{ flex: 0.1, paddingLeft: 10 }} onPress={() => this.props.navigation.navigate('Cart')}>
+          <TouchableOpacity style={{ flex: 0.1, paddingLeft: 10 }} onPress={() => this.props.navigation.goBack()}>
             <Ionicons name="ios-arrow-back" size={32} color="black" />
           </TouchableOpacity>
           <View style={{ flex: 0.8 }}>
@@ -34,13 +56,13 @@ export default class CheckoutScreen extends Component {
         <Card style={{ flex: 0.25, marginLeft: 10, marginRight: 10, paddingLeft:10, paddingRight:10 }} >
           <View style={{paddingTop:5, paddingBottom:5}}>
             <Text style={{fontSize:16}}> Alamat</Text>
-            <Textarea rowSpan={3} bordered placeholder="Informasi Alamat" />
+            <Textarea onChangeText={alamat => this.setState({ alamat })} rowSpan={3} bordered placeholder="Informasi Alamat" />
           </View>
         </Card>
         <Card style={{ flex: 0.25, marginLeft: 10, marginRight: 10, paddingLeft: 10, paddingRight: 10 }} >
           <View style={{ paddingTop: 5, paddingBottom: 5 }}>
             <Text style={{ fontSize: 16 }}> Pesan</Text>
-            <Textarea rowSpan={3} bordered placeholder="Informasi Pesan" />
+            <Textarea onChangeText={pesan => this.setState({ pesan })} rowSpan={3} bordered placeholder="Informasi Pesan" />
           </View>
         </Card>
         <Card style={{ flex: 0.25, paddingTop: 20, marginLeft: 10, marginRight: 10, paddingLeft:10, paddingRight:10 }} >
@@ -63,7 +85,7 @@ export default class CheckoutScreen extends Component {
           </View>
         </Card>
         <View style={{ padding: 10, marginLeft: 15, marginRight: 15 }}>
-          <Button block onPress={() => this.props.navigation.navigate('Information')}>
+          <Button block onPress={() => this._checkInput()}>
             <Text style={{ color: 'white' }}>Buy</Text>
           </Button>
         </View>
