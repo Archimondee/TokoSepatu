@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, AsyncStorage, Image } from 'react-native';
 import {
   Container,
   Header,
@@ -24,7 +24,7 @@ export default class LoginScreen extends Component {
 
   _userLogin = () => {
     const {username, password} = this.state;
-    fetch('http://192.168.0.7:8080/api_sepatu/Login.php',{
+    fetch('http://simlabtiug.com/api_sepatu/Login.php',{
       method: 'POST',
       headers:{
         'Accept' : 'application/json',
@@ -56,8 +56,8 @@ export default class LoginScreen extends Component {
       <SafeAreaView style={{paddingTop:30, flex:1,  width:'100%'}}>
         <Content padder>
           <View style={{ flex: 2, paddingTop:'10%', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
-            <View style={{ height: 200, width: 200, borderColor: 'black', borderWidth: 1 }}>
-              <Text>Logo</Text>
+            <View style={{ height: 200, width: 200 }}>
+              <Image source={require('../../assets/toko-logo.jpg')} resizeMode={"contain"} style={{height:200, width:200}}/>
             </View>
           </View>
           <View style={{ flex: 1, paddingTop:50 }}>

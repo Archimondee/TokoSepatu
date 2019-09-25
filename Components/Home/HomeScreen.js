@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, ImageBackground, Image, AsyncStorage, Dimensions } from 'react-native';
 import {Container, Header, Content, Card, CardItem} from 'native-base';
+import { ResizeMode } from 'expo-av/build/Video';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class HomeScreen extends Component {
   }
 
   _getItems = () => {
-    fetch('http://192.168.0.7:8080/api_sepatu/getItem.php', {
+    fetch('http://simlabtiug.com/api_sepatu/getItem.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -38,7 +39,7 @@ export default class HomeScreen extends Component {
           username: value
         })
 
-        fetch('http://192.168.0.7:8080/api_sepatu/getInfo.php',{
+        fetch('http://simlabtiug.com/api_sepatu/getInfo.php',{
           method: 'POST',
           header: {
             'Accept' : 'application/json',
@@ -69,6 +70,7 @@ export default class HomeScreen extends Component {
     })
   }
 
+
   render() {
     const {width, height} = Dimensions.get('window');
     return (
@@ -76,8 +78,8 @@ export default class HomeScreen extends Component {
         <SafeAreaView style={{ flex: 1 }}>
           <Container style={{ marginTop: 20 }}>
             <Content padder>
-              <View style={{ height: 100, width: '95%', paddingLeft: 10, margin: 10, justifyContent: 'center', alignContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'black' }}>
-                <Text>Banner</Text>
+              <View style={{ height: 100, width: '95%', margin: 10, justifyContent: 'center', alignContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'black' }}>
+                <Image source={require('../../assets/banner.jpg')} style={{height:100, width:'100%'}}/>
               </View>
               <Card style={{}}>
                 <CardItem header bordered style={{ borderBottomWidth: 0.5, borderBottomColor: 'black', backgroundColor:'#2f5aa4' }}>
@@ -113,7 +115,6 @@ export default class HomeScreen extends Component {
                   <Text style={{ fontWeight: 'bold', color: 'white' }}>Rekomendasi</Text>
                 </CardItem>
                 <CardItem cardBody style={{ flex: 1, flexDirection: 'row', width:'100%', flexWrap:'wrap'}}>
-
                 {
                   this.state.data.map((items, i)=>{
                     return (

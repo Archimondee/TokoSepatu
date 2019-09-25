@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, KeyboardAvoidingView, AsyncStorage } from 'react-native';
+import { View, Text, SafeAreaView, KeyboardAvoidingView, AsyncStorage, Image } from 'react-native';
 import {
   Container,
   Header,
@@ -76,9 +76,9 @@ export default class RegisterScreen extends Component {
         <KeyboardAvoidingView style={{ flex: 1, width: '100%', height:'100%'}} behavior="padding" enabled>
           <Content padder>
             <View style={{ flex: 2, paddingTop: '10%', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
-              <View style={{ height: 200, width: 200, borderColor: 'black', borderWidth: 1 }}>
-                <Text>Logo</Text>
-              </View>
+              <View style={{ height: 200, width: 200 }}>
+              <Image source={require('../../assets/toko-logo.jpg')} resizeMode={"contain"} style={{height:200, width:200}}/>
+            </View>
             </View>
             <View style={{ flex: 1, paddingTop: 50 }}>
               <View style={{ paddingTop: 15 }}>

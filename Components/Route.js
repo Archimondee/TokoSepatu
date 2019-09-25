@@ -26,7 +26,7 @@ import PacketScreen from './Market/PacketScreen';
 import TransaksiScreen from './Market/TransaksiScreen';
 import Transaksi1Screen from './Market/Transaksi1Screen';
 import PenerimaScreen from './Market/PenerimaScreen';
-
+import WishScreen from './Market/WishScreen';
 
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
@@ -35,8 +35,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
   let iconName;
   if (routeName === 'Home') {
     iconName = 'ios-home';
-  } else if (routeName === 'Tokoku') {
-    iconName = 'ios-search';
+  } else if (routeName === 'Wishlist') {
+    iconName = 'md-paper';
   } else if (routeName === 'Pembelian') {
     iconName = 'ios-cart';
   } else if (routeName === 'Account') {
@@ -78,7 +78,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 const MainNavigation = createBottomTabNavigator({
   Home: HomeStack,
   Pembelian: PesananScreen,
-  Tokoku : PesananScreen, //Wishlist
+  Wishlist : WishScreen, //Wishlist
   Account: ProfileScreen
 }, {
     defaultNavigationOptions: ({ navigation }) => ({

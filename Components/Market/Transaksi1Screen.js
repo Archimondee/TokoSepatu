@@ -51,7 +51,7 @@ export default class Transaksi1Screen extends Component {
 
   _getRekening = () => {
     const {id_pembelian} = this.state;
-    fetch ('http://192.168.0.7:8080/api_sepatu/getRek.php', {
+    fetch ('http://simlabtiug.com/api_sepatu/getRek.php', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -77,7 +77,7 @@ export default class Transaksi1Screen extends Component {
     const {id_pembelian, id_barang} = this.state;
     console.log (id_pembelian);
     console.log (id_barang);
-    fetch ('http://192.168.0.7:8080/api_sepatu/changeStatus.php', {
+    fetch ('http://simlabtiug.com/api_sepatu/changeStatus.php', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -101,7 +101,7 @@ export default class Transaksi1Screen extends Component {
 
   pindah=()=>{
     console.log('Pindah pindahhh');
-    this.props.navigation.navigate('Pesanan')
+    this.props.navigation.navigate('Pembelian')
   }
   render () {
     var {height, width} = Dimensions.get ('window');

@@ -67,7 +67,7 @@ export default class InformationScreen extends Component {
       user_id,
     } = this.state;
     //console.log(this.state);
-    fetch ('http://192.168.0.7:8080/api_sepatu/PostPembelian.php', {
+    fetch ('http://simlabtiug.com/api_sepatu/PostPembelian.php', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

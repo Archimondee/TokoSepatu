@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, View, Text, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Header, Left, Body, Right, Card, CardItem, Button } from 'native-base';
 import { Ionicons } from 'react-native-vector-icons';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 export default class ProductScreen extends Component {
   constructor(props) {
@@ -25,12 +26,121 @@ export default class ProductScreen extends Component {
       sizeMin: this.props.navigation.getParam('sizeMin'),
       sizeMax: this.props.navigation.getParam('sizeMax'),
       keterangan: this.props.navigation.getParam('keterangan'),
-      harga: this.props.navigation.getParam('harga')
+      harga: this.props.navigation.getParam('harga'),
+      user_id: '',
+
+      SLIDER_FIRST_ITEM: 1,
+
+      ada: false
     };
   }
 
+  componentDidMount(){
+    this.getUserId();
+    this.checkWishlist();
+  }
+
+  getUserId(){
+    AsyncStorage.getItem('Profile').then((value) => {
+      let data = JSON.parse(value);
+      //console.log(value);
+      if (data != null) {
+        this.setState({
+          user_id: data.user_id,
+        })
+        //console.log(data.user_id)
+      }
+    })
+  }
+
+  addWishlist(){
+    const {id_barang, user_id} = this.state;
+    fetch('http://simlabtiug.com/api_sepatu/PostWishlist.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id_barang : id_barang, 
+        user_id: user_id
+      })
+    }).then((response) => response.json())
+      .then((responseJson => {
+        if(responseJson == 'Masuk'){
+          alert('Wishlist di tambahkan');
+          this.props.navigation.navigate('Wishlist');
+        }else{
+          console.log("err");
+        }
+      }))
+  }
+
+  checkWishlist(){
+    //this.getUserId();
+    const {id_barang, user_id} = this.state;
+    AsyncStorage.getItem('Profile').then((value) => {
+      let data = JSON.parse(value);
+      //console.log(value);
+      if (data != null) {
+        //console.log("Barang : "+id_barang);
+    //console.log("User : "+data.user_id)
+    fetch('http://simlabtiug.com/api_sepatu/checkWish.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      
+      body: JSON.stringify({
+        id_barang : id_barang, 
+        user_id: data.user_id
+      })
+    }).then((response) => response.json())
+      .then((responseJson => {
+        console.log(responseJson);
+        if(responseJson == 'Ada'){
+          this.setState({
+            ada: true
+          })
+        }else{
+          this.setState({
+            ada: false
+          })
+        }
+      }))
+      }
+    })
+    
+    
+  }
+
+  remWishlist(){
+    const {id_barang, user_id} = this.state;
+    fetch('http://simlabtiug.com/api_sepatu/remWish.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id_barang : id_barang, 
+        user_id: user_id
+      })
+    }).then((response) => response.json())
+      .then((responseJson => {
+        console.log(responseJson)
+        if(responseJson == 'Berhasil'){
+          alert('Wishlist barang telah di hapus');
+          this.props.navigation.navigate('Wishlist');
+        }else{
+          console.log("err");
+        }
+      }))
+  }
   
-  //Edit Item
+  
+  //Edit Itemm
   render() {
     return (
       <View style={{ flex: 1, paddingTop: 30 }}>
@@ -47,7 +157,18 @@ export default class ProductScreen extends Component {
         </Header>
         <ScrollView style={{ flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 5 }}>
           <View style={{ height: 200, borderWidth: 1, borderColor: 'black', width: '100%' }}>
-
+            {this.state.foto_base641
+                    ? <Image
+                        source={{
+                          uri: 'data:image/' +
+                            this.state.tipe1 +
+                            ';base64,' +
+                            this.state.foto_base641,
+                        }}
+                        style={{width: '100%', height: '100%'}}
+                        resizeMode="contain"
+                      />
+                    : (<Text>Test</Text>)}
           </View>
           <View style={{ paddingTop: 5 }}>
             <Text style={{ fontSize: 20 }}>{this.state.nama_barang}</Text>
@@ -107,9 +228,17 @@ export default class ProductScreen extends Component {
                 </View>
                 <View style={{ paddingTop: 20, paddingBottom: 30 }}>
                   <View style={{ paddingTop: 20 }}>
-                    <Button block>
-                      <Text style={{ color: 'white' }}>Add To Wishlist</Text>
-                    </Button>
+                        {
+                          this.state.ada==true ? (
+                            <Button block onPress={()=>this.remWishlist()}>
+                              <Text style={{ color: 'white' }}>Remove from Wishlist</Text>
+                            </Button>
+                          ):(
+                            <Button block onPress={()=>this.addWishlist()}>
+                              <Text style={{ color: 'white' }}>Add To Wishlist</Text>
+                            </Button>
+                          )
+                        }
                   </View>
                   <View style={{ paddingTop: 20, paddingBottom: 30 }}>
                     <Button block onPress={()=>this.props.navigation.navigate('Cart',{

@@ -78,7 +78,7 @@ export default class TransaksiScreen extends Component {
     if(isPic==false){
       alert('Silahkan upload bukti transaksi');
     }else{
-      fetch('http://192.168.0.7:8080/api_sepatu/PostPembayaran.php',{
+      fetch('http://simlabtiug.com/api_sepatu/PostPembayaran.php',{
         method:'POST',
         headers:{
           'Accept': 'application/json',
@@ -102,7 +102,7 @@ export default class TransaksiScreen extends Component {
       .then((responseJson => {
         if (responseJson == 'Terkirim') {
           alert('Informasi Terkirim');
-          this.props.navigation.navigate('Packet');
+          this.props.navigation.navigate('Pembelian');
         }
       }))
     }
@@ -110,7 +110,7 @@ export default class TransaksiScreen extends Component {
 
   pindah=()=>{
     console.log('Pindah pindahhh');
-    this.props.navigation.navigate('Pesanan')
+    this.props.navigation.navigate('Pembelian')
   }
 
   render() {

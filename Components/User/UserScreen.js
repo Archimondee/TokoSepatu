@@ -83,7 +83,7 @@ export default class RegisterScreen extends Component {
 
     console.log("Password : "+password);
      if(benar == 3){
-       fetch('http://192.168.0.7:8080/api_sepatu/Register.php',{
+       fetch('http://simlabtiug.com/api_sepatu/Register.php',{
          method: 'POST',
          headers: {
            'Accept' : 'application/json',

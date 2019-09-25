@@ -17,6 +17,7 @@ export default class SendScreen extends Component {
       nama: '',
       user_id: '',
       data: [],
+      q: false
     };
   }
 
@@ -36,23 +37,30 @@ export default class SendScreen extends Component {
 
   _getItem () {
     const {nama, user_id} = this.state;
-    fetch ('http://192.168.0.7:8080/api_sepatu/getSelesai.php', {
+    
+    fetch ('http://simlabtiug.com/api_sepatu/getSelesai.php', {
       method: 'POST',
       header: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify ({
-        nama: nama,
         user_id: user_id,
       }),
     })
       .then (response => response.json ())
       .then (responseJson => {
-        this.setState ({
-          data: responseJson,
-        });
-        console.log ('Data : ' + this.state.data);
+        if(responseJson == 'Tidak'){
+          this.setState({
+            q: false,
+            data: []
+          })
+        }else{
+          this.setState({
+            q:true,
+            data: responseJson
+          })
+        }
       });
   }
 
@@ -61,7 +69,9 @@ export default class SendScreen extends Component {
     return (
       <View style={{flex: 1}}>
         <ScrollView style={{flex: 1}}>
-          {this.state.data.map ((items, i) => {
+          {
+            this.state.q == true ?(
+              this.state.data.map ((items, i) => {
             if (items.status_pembelian == '0') {
               status = 'Menunggu Pembayaran';
             } else if (items.status_pembelian == '1') {
@@ -200,7 +210,9 @@ export default class SendScreen extends Component {
                 />
               </Card>
             );
-          })}
+          })
+            ):(<Text>Data Belum ada</Text>)
+          }
 
         </ScrollView>
       </View>
